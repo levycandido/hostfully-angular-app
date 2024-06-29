@@ -1,0 +1,101 @@
+.top-menu-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
+  .menu, .top-menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu {
+    flex-grow: 1;
+  }
+
+  .menu-item, .top-menu-item {
+    margin-right: 20px;
+    font-size: 16px;
+
+    a {
+      color: #333;
+      text-decoration: none;
+      padding: 10px 15px;
+      display: block;
+
+      &:hover {
+        background: #007bff;
+        color: #fff;
+      }
+    }
+  }
+
+  .top-menu-item {
+    margin-right: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #0056b3;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .login-button {
+    background-color: #1c5860;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 30px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 30px;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: blueviolet;
+    }
+  }
+
+  .logout-button {
+    background-color: #1c5860;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 30px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 30px;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: blueviolet;
+    }
+  }
+}
+
+

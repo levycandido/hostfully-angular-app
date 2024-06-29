@@ -1,0 +1,51 @@
+<div class="hero-image">
+  <div class="search-container">
+    <h1>Find Your Perfect Place</h1>
+    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+      <div class="form-container">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Location</mat-label>
+          <input matInput id="location" formControlName="location" name="location" required>
+          <mat-error *ngIf="searchForm.get('location')?.invalid">Location is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Check-in</mat-label>
+          <input matInput [matDatepicker]="picker1" formControlName="checkin" required>
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+          <mat-error *ngIf="searchForm.get('checkin')?.invalid">Check-in is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Check-out</mat-label>
+          <input matInput [matDatepicker]="picker2" formControlName="checkout" required>
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+          <mat-error *ngIf="searchForm.get('checkout')?.invalid">Check-out is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Guests</mat-label>
+          <input matInput type="number" formControlName="guests" name="guests" required>
+          <mat-error *ngIf="searchForm.get('guests')?.invalid">Guests is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-field">
+        <button
+          mat-raised-button
+          class="search-button"
+          color="primary"
+          [disabled]="!searchForm.valid"
+          [ngClass]="{'invalid-button': !searchForm.valid, 'valid-button': searchForm.valid}">
+          Search
+        </button>
+
+      </div>
+    </form>
+  </div>
+  <div class="map-container">
+    <app-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom"></app-map>
+  </div>
+  <div class="footer-space"></div>
+</div>

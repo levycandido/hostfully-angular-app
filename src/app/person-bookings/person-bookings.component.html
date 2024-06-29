@@ -1,0 +1,19 @@
+<div class="booking-container">
+  <h1 class="title">Your Bookings</h1>
+  <div class="booking-list">
+    <div class="booking-card" *ngFor="let booking of bookings">
+      <div class="booking-info">
+        <h2>{{ booking.place.name }}</h2>
+        <p>{{ booking.place.location }}</p>
+        <p>Start Date: {{ booking.startDate | date }}</p>
+        <p>End Date: {{ booking.endDate | date }}</p>
+        <p [ngClass]="getStatusClass(booking.status)">Status: {{ booking.status }}</p>
+      </div>
+      <div class="booking-actions" *ngIf="booking.status !== 'Booked'">
+        <button mat-raised-button class="pay-button" (click)="pay(booking)" *ngIf="booking.status !== 'Canceled'">Pay</button>
+        <button mat-raised-button class="cancel-button" (click)="cancel(booking)" *ngIf="booking.status !== 'Canceled'">Cancel</button>
+        <button mat-raised-button class="rebook-button" (click)="rebook(booking)" *ngIf="booking.status !== 'Pending'">Rebook</button>
+      </div>
+    </div>
+  </div>
+</div>

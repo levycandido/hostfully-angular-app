@@ -1,0 +1,98 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+.booking-container {
+  background-color: #f9f9f9;
+  color: #333;
+  min-height: 100vh;
+  padding: 20px;
+  padding-top: 80px; /* Adicionando espaço superior */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .title {
+    font-size: 2.5em;
+    color: #3f51b5;
+    margin-bottom: 20px;
+  }
+
+  .booking-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+
+    .booking-card {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      transition: transform 0.3s ease-in-out;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
+
+      .booking-info {
+        flex: 1;
+
+        h2 {
+          font-size: 1.5em;
+          margin-bottom: 10px;
+          color: #e57373;
+        }
+
+        p {
+          margin: 5px 0;
+          color: #757575;
+        }
+
+        .status-pending {
+          color: #FFA500; /* Laranja suave */
+        }
+
+        .status-canceled {
+          color: #1c5860; /* Rosa claro */
+        }
+
+        .status-booked {
+          color: #81c784; /* Verde claro */
+        }
+      }
+
+      .booking-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end; /* Alinha os botões à direita */
+        justify-content: flex-start; /* Garante que os botões fiquem no topo */
+
+        button {
+          margin: 5px 0;
+          width: 120px;
+          font-size: 14px;
+          border-radius: 20px;
+
+          &.pay-button {
+            background-color: #81c784;
+            color: white;
+          }
+
+          &.cancel-button {
+            background-color: #e57373;
+            color: white;
+          }
+
+          &.rebook-button {
+            background-color: #64b5f6;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}

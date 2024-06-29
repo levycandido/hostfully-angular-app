@@ -1,0 +1,29 @@
+<div class="top-menu-container">
+  <nav>
+    <ul class="menu">
+      <li class="menu-item"><a href="/">Home</a></li>
+      <li class="menu-item"><a href="/about">About</a></li>
+      <li class="menu-item"><a href="/services">Services</a></li>
+      <li class="menu-item"><a href="/contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="right-menu">
+  </div>
+  <ng-container *ngIf="isLoggedIn; else loggedOut">
+    <li class="top-menu-item">
+      <ul class="top-menu">
+        <li class="top-menu-item">
+          Hire me: &nbsp;
+          <a href=# target="_blank" rel="noopener noreferrer nofollow">
+            tel: 55 11 94428-1234
+          </a>
+        </li>
+      </ul>
+      <button mat-raised-button class="logout-button" color="primary">Logout</button>
+  </ng-container>
+  <ng-template #loggedOut>
+    <button mat-raised-button class="login-button" color="primary">Login</button>
+  </ng-template>
+
+
+</div>

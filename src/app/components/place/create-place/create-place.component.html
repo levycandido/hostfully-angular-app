@@ -1,0 +1,23 @@
+<mat-card class="create-place-card">
+  <mat-card-title>Create New Place</mat-card-title>
+  <mat-card-subtitle>Please fill out the form below to create a new place.</mat-card-subtitle>
+  <mat-card-content>
+    <form (ngSubmit)="onSubmit(placeForm)" #placeForm="ngForm">
+      <div class="form-group">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Place Name</mat-label>
+          <input matInput id="name" [(ngModel)]="place.name" name="name" required>
+          <mat-error *ngIf="placeForm.controls.name?.invalid">Name is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Location</mat-label>
+          <input matInput id="location" [(ngModel)]="place.street" name="location" required>
+          <mat-error *ngIf="placeForm.controls.location?.invalid">Location is required</mat-error>
+        </mat-form-field>
+      </div>
+      <button mat-raised-button color="primary" type="submit">Create Place</button>
+    </form>
+  </mat-card-content>
+</mat-card>
