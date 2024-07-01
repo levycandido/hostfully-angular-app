@@ -11,26 +11,28 @@ import {RouterModule, Routes} from "@angular/router";
 import {SearchPageComponent} from "./search-page/search-page.component";
 import {MatIconModule} from "@angular/material/icon";
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MapComponent} from "./map/map.component";
+import {MapComponent} from "./components/map/map.component";
 import {MatNativeDateModule} from "@angular/material/core";
 import {AuthService} from "./services/auth.service";
 import {AuthGuard} from "./auth.guard";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./auth.interceptor";
 import {RegisterComponent} from "./auth/components/register/register.component";
-import {DashboardComponent} from "./auth/components/dashboard/dashboard.component";
-import { ReservationComponent } from './reservation/reservation.component';
-import { PersonBookingsComponent } from './person-bookings/person-bookings.component';
+import { ReservationComponent } from './components/booking/reservation/reservation.component';
 import {LoginComponent} from "./auth/components/login/login-component.component";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatCardModule} from "@angular/material/card";
+import {MatMenuModule} from "@angular/material/menu";
+import {CreatePlaceComponent} from "./components/place/create-place/create-place.component";
+import {PersonBookingsComponent} from "./components/booking/person-bookings/person-bookings.component";
 
 const routes: Routes = [
   { path: '', component: SearchPageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'reservation', component: ReservationComponent },
-  { path: "dashboard", component: DashboardComponent },
   { path: "signup", component: RegisterComponent },
-  { path: 'person-bookings', component: PersonBookingsComponent }
+  { path: 'person-bookings', component: PersonBookingsComponent },
+  { path:'create-place', component: CreatePlaceComponent}
 ];
 
 @NgModule({
@@ -41,9 +43,9 @@ const routes: Routes = [
     MapComponent,
     RegisterComponent,
     LoginComponent,
-    DashboardComponent,
     ReservationComponent,
-    PersonBookingsComponent
+    PersonBookingsComponent,
+    CreatePlaceComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,9 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     MatSnackBarModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    MatCardModule,
+    MatMenuModule
   ],
   providers: [
     AuthService,

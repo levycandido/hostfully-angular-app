@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 import {JwtService2} from "../../service/jwt-service2.service";
 import {catchError, tap} from "rxjs/operators";
 import {of} from "rxjs";
+import {NotificationService} from "../../../services/NotificationService";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private service: JwtService2,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
   ) {
   }
 
@@ -34,16 +36,16 @@ export class LoginComponent implements OnInit {
         if (response.jwt) {
           localStorage.setItem('email', this.loginForm.get("email").value);
           localStorage.setItem('userId', this.loginForm.get("email").value);
-          this.router.navigateByUrl("/");
         }
       }),
       catchError(error => {
         if (error.status === 403) {
-          alert("Access Denied: Invalid credentials");
+          this.notificationService.showError('Access Denied: Invalid credentials', error);
         } else {
-          alert("An unexpected error occurred");
+          this.notificationService.showError("An unexpected error occurred");
         }
         return of(null);
       })
-    ).subscribe();
-  }}
+    ).subscribe(value => this.router.navigateByUrl("/"));
+  }
+}

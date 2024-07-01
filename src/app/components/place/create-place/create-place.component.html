@@ -1,23 +1,42 @@
-<mat-card class="create-place-card">
-  <mat-card-title>Create New Place</mat-card-title>
-  <mat-card-subtitle>Please fill out the form below to create a new place.</mat-card-subtitle>
-  <mat-card-content>
-    <form (ngSubmit)="onSubmit(placeForm)" #placeForm="ngForm">
-      <div class="form-group">
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Place Name</mat-label>
-          <input matInput id="name" [(ngModel)]="place.name" name="name" required>
-          <mat-error *ngIf="placeForm.controls.name?.invalid">Name is required</mat-error>
-        </mat-form-field>
-      </div>
-      <div class="form-group">
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Location</mat-label>
-          <input matInput id="location" [(ngModel)]="place.street" name="location" required>
-          <mat-error *ngIf="placeForm.controls.location?.invalid">Location is required</mat-error>
-        </mat-form-field>
-      </div>
-      <button mat-raised-button color="primary" type="submit">Create Place</button>
-    </form>
-  </mat-card-content>
-</mat-card>
+<div class="container">
+  <mat-card class="create-place-card">
+    <mat-card-title>Create New Place</mat-card-title>
+    <mat-card-subtitle>Please fill out the form below to create a new place.</mat-card-subtitle>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit(placeForm)" #placeForm="ngForm">
+        <div class="form-group">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Place Name</mat-label>
+            <input matInput id="name" [(ngModel)]="place.name" name="name" required>
+            <mat-error *ngIf="placeForm.controls.name?.invalid">Name is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Street</mat-label>
+            <input matInput id="street" name="street" required>
+            <mat-error *ngIf="placeForm.controls.street?.invalid">Street is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Latitude</mat-label>
+            <input matInput id="latitude" name="latitude" required>
+            <mat-error *ngIf="placeForm.controls.street?.invalid">Street is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Longitude</mat-label>
+            <input matInput id="longitude" name="longitude" required>
+            <mat-error *ngIf="placeForm.controls.street?.invalid">Street is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="button-group">
+          <button mat-button type="button" (click)="goBack()">Cancel</button>
+          <button mat-raised-button class="btn-create-place" type="submit">Create Place</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

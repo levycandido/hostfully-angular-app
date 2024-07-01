@@ -9,6 +9,9 @@ import { AuthService } from '../services/auth.service'; // Certifique-se de ajus
 export class TopMenuComponent implements OnInit {
   isLoggedIn: boolean = false;
   userName: string | null = null;
+  isAdmin: boolean = true;
+  showCadastroMenu: boolean = false;
+  private userRole: string = 'admin';
 
   constructor(private authService: AuthService) { }
 
@@ -22,5 +25,9 @@ export class TopMenuComponent implements OnInit {
   logout(): void {
     this.authService.logout();
     window.location.reload();
+  }
+
+  toggleCadastroMenu(): void {
+    this.showCadastroMenu = !this.showCadastroMenu;
   }
 }

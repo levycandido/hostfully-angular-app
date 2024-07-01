@@ -1,25 +1,50 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 .container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background: url('/assets/gradient-bg.jpg') no-repeat center center;
+  background-size: cover;
+  position: relative;
+  padding-top: 50px;
+}
+
+.create-place-card {
   max-width: 600px;
-  margin: auto;
+  margin: 40px auto;
+  margin-top: 120px;
   padding: 20px;
+  border-radius: 10px;
+  background-color: black;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+  font-family: 'Roboto', sans-serif;
+}
+
+mat-card-title, mat-card-subtitle {
+  text-align: center;
 }
 
 .full-width {
   width: 100%;
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
-
-.submit-button {
-  display: block;
-  width: 100%;
+.button-group {
+  display: flex;
+  justify-content: space-between;
   margin-top: 20px;
 }
 
-@media (max-width: 600px) {
-  .container {
-    padding: 10px;
-  }
+button {
+  width: 48%;
+}
+
+.btn-create-place {
+  background-color: #1c5860;
+  color: #ffffff;
+}
+button[type="button"] {
+  background-color: #f5f5f5;
 }

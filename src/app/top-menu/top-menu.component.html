@@ -4,7 +4,14 @@
       <li class="menu-item"><a href="/">Home</a></li>
       <li class="menu-item"><a href="/about">About</a></li>
       <li class="menu-item"><a href="/services">Services</a></li>
-      <li class="menu-item"><a href="/contact">Contact</a></li>
+      <li class="menu-item">
+        <a href="#" (click)="toggleCadastroMenu()">Enrol</a>
+        <ul class="submenu" [class.show]="showCadastroMenu && isAdmin">
+          <li class="submenu-item"><a href="/create-place">Place</a></li>
+          <li class="submenu-item"><a href="/enrol-block">Block</a></li>
+          <li class="submenu-item"><a href="/signup">User</a></li>
+        </ul>
+      </li>
     </ul>
   </nav>
   <div class="right-menu">
@@ -19,10 +26,10 @@
           </a>
         </li>
       </ul>
-      <button mat-raised-button class="logout-button" color="primary">Logout</button>
+      <button mat-raised-button class="logout-button" color="primary" (click)="logout()">Logout</button>
   </ng-container>
   <ng-template #loggedOut>
-    <button mat-raised-button class="login-button" color="primary">Login</button>
+    <button mat-raised-button class="login-button" color="primary" [routerLink]="['/login']">Login</button>
   </ng-template>
 
 

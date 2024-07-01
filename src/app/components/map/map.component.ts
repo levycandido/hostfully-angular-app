@@ -1,10 +1,11 @@
 import {Component, OnInit, Input, OnChanges, SimpleChanges, AfterViewInit} from '@angular/core';
-import {PlaceService} from "../services/PlaceService";
+import {PlaceService} from "../../services/PlaceService";
 import {catchError, mergeMap, tap} from "rxjs/operators";
-import {Place} from "../models/Place";
+import {Place} from "../../models/Place";
 import {from, of} from "rxjs";
-import {SharedService} from "../shared.service";
+import {SharedService} from "../../shared.service";
 import {Router} from "@angular/router";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-map',
@@ -20,7 +21,8 @@ export class MapComponent implements OnInit, OnChanges, AfterViewInit {
 
   constructor(private placeService: PlaceService,
               private sharedService: SharedService,
-              private router: Router) {}
+              private router: Router,
+              private authService: AuthService) {}
 
   ngOnInit(): void {
   }
@@ -46,7 +48,6 @@ export class MapComponent implements OnInit, OnChanges, AfterViewInit {
       if (mapElement) {
         this.map = new google.maps.Map(mapElement, mapProperties);
 
-        // Recuperar e adicionar marcadores com RxJS
         this.placeService.getPlaces().pipe(
           mergeMap((places: Place[]) => from(places)),
           tap((place: Place) => {
@@ -76,15 +77,17 @@ export class MapComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   handleMarkerClick(place: Place): void {
-    this.sharedService.selectPlace(place);
-    this.router.navigate(['/reservation']);
+    if (this.authService.isLoggedIn()) {
+      this.sharedService.selectPlace(place);
+      this.router.navigate(['/reservation']);
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
-
 
   isValidCoordinates(lat: number, lng: number): boolean {
     return !isNaN(lat) && !isNaN(lng) && lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180;
   }
-
 
   isValidZoom(zoom: number): boolean {
     return !isNaN(zoom) && zoom >= 0 && zoom <= 21;

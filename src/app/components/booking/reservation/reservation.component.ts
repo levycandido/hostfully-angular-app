@@ -1,14 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {Place} from "../models/Place";
-import {SharedService} from "../shared.service";
+import {Place} from "../../../models/Place";
+import {SharedService} from "../../../shared.service";
 import {catchError, map, tap} from "rxjs/operators";
 import {of} from "rxjs";
-import {Booking} from "../models/Booking";
-import {Person} from "../models/Person";
-import {PersonService} from "../services/PersonService";
-import {BookingService} from "../services/BookingService";
+import {Booking} from "../../../models/Booking";
+import {Person} from "../../../models/Person";
+import {PersonService} from "../../../services/PersonService";
+import {BookingService} from "../../../services/BookingService";
+import { Location } from '@angular/common';
+import {NotificationService} from "../../../services/NotificationService";
 
 @Component({
   selector: 'app-reservation',
@@ -27,7 +29,9 @@ export class ReservationComponent implements OnInit {
     private sharedService: SharedService,
     private bookingService: BookingService,
     private personService: PersonService,
-    private router: Router
+    private router: Router,
+    private location: Location,
+    private notificationService: NotificationService
   ) {
     this.reservationForm = this.fb.group({
       name: ['', Validators.required],
@@ -46,7 +50,6 @@ export class ReservationComponent implements OnInit {
     this.sharedService.selectedPlace$.subscribe(place => {
       if (place) {
         this.selectedPlace = place;
-
       }
     });
 
@@ -66,13 +69,13 @@ export class ReservationComponent implements OnInit {
       this.bookingService.createBooking(this.booking)
         .pipe(
           catchError(error => {
-            alert('Erro ao realizar a reserva');
+            this.notificationService.showError('Erro ao realizar a reserva');
             return of(null);
           })
         )
         .subscribe(response => {
           if (response) {
-            alert('Reserva realizada com sucesso');
+            this.notificationService.showSuccess('Reserva realizada com sucesso');
             this.router.navigateByUrl('/person-bookings');
           }
         });
@@ -83,7 +86,7 @@ export class ReservationComponent implements OnInit {
       tap((data: Person) => {
         this.person = data[0];
         this.booking = {
-          status: 'Booked',
+          status: 'Pending',
           startDate: this.reservationForm.get('checkinDate')?.value,
           endDate: this.reservationForm.get('checkoutDate')?.value,
           guest: {
@@ -105,6 +108,10 @@ export class ReservationComponent implements OnInit {
         });
       }
     });
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }

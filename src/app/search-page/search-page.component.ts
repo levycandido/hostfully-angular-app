@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpClient} from "@angular/common/http";
 import {SharedService} from "../shared.service";
 import {Booking} from "../models/Booking";
+import {NotificationService} from "../services/NotificationService";
 
 @Component({
   selector: 'app-search-page',
@@ -18,7 +19,8 @@ export class SearchPageComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private http: HttpClient,
-              private sharedService: SharedService) {
+              private sharedService: SharedService,
+              private notificationService: NotificationService) {
     this.searchForm = this.fb.group({
       location: ['', Validators.required],
       checkin: ['', Validators.required],
@@ -28,7 +30,7 @@ export class SearchPageComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
+   }
 
   onSubmit(): void {
     if (this.searchForm.valid) {
@@ -49,7 +51,7 @@ export class SearchPageComponent implements OnInit {
         this.zoom = 12;
         this.sharedService.selectSearch(this.createBoockingSearch());
       } else {
-        alert('Geocode was not successful for the following reason: ' + response.status);
+        this.notificationService.showError('Geocode was not successful for the following reason: ' + response.status);
       }
     });
   }

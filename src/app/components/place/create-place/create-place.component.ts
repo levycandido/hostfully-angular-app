@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {NgForm} from '@angular/forms';
 
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Place} from "../../../models/Place";
 import {PlaceService} from "../../../services/PlaceService";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-create-place',
@@ -12,13 +13,18 @@ import {PlaceService} from "../../../services/PlaceService";
 })
 export class CreatePlaceComponent implements OnInit {
   place: Place = {
+    latitude: 0, longitude: 0,
     name: '',
     street: ''
   };
 
-  constructor(private placeService: PlaceService, private snackBar: MatSnackBar) { }
+  constructor(private placeService: PlaceService,
+              private snackBar: MatSnackBar,
+              private location: Location) {
+  }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
   onSubmit(form: NgForm): void {
     if (form.valid) {
@@ -36,5 +42,9 @@ export class CreatePlaceComponent implements OnInit {
         }
       });
     }
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
